@@ -1,9 +1,12 @@
-def reverse(self, x: int) -> int:
-        sign = 1
-        if x < 0:
-            sign = -1
-            x = sign * x
-        x = sign * int(str(x)[::-1])
-        if x < -2**31 or x > 2**31 - 1:
-            return 0
-        return x
+def reverse(x):
+        rem = abs(x)
+        res = 0
+
+        while rem != 0:
+            res *= 10
+            res += rem % 10
+            rem = rem // 10
+        
+        return res if x > 0 else -res
+
+print(reverse(-1230))
