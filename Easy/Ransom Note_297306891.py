@@ -1,8 +1,17 @@
 class Solution:
     def canConstruct(self, ransomNote: str, magazine: str) -> bool:
-        from collections import Counter
-        r = dict(Counter(ransomNote))
-        m = dict(Counter(magazine))
-        if(all(m.get(key,0)>=val for key,val in r.items())):
-            return True
-        return False
+        m = {}
+        
+        for c in magazine:
+            if c not in m:
+                m[c] = 1
+            else:
+                m[c] += 1
+        
+        for c in ransomNote:
+            if c not in m or m[c] < 1:
+                return False
+            else:
+                m[c] -= 1
+        
+        return True
